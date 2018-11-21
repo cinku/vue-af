@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Intro to Vue.js</title>
+    <script src="https://unpkg.com/vue"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app" class="container">
+        <img src="./assets/logo.png">
+        <div class="row text-center">
+            <h2><strong>Quotes Added</strong></h2>
+            <div class="progress mb-3">
+                <div class="progress-bar" v-bind:style="{ width: (quotesNumber * 10) + '%' }">
+                    {{quotesNumber}} / {{maxQuotes}}
+                </div>
+            </div>
+        </div>
+        <div class="row" v-if="quotesNumber < maxQuotes">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" v-model.trim="newQuote" v-on:keyup.enter="addQuote" />
+                <button class="btn btn-success" v-on:click="addQuote">Add quote</button>
+            </div>
+        </div>
+        <div class="row list-container">
+            <span class="quote mr-3 animated fadeIn" v-for="(quote, index) in quotes" v-on:click="deleteQuote(index)">{{ quote }}</span>
+            <p v-if="quotes.length === 0" class="animated fadeIn">Add some quotes ;)</p>
+        </div>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                quotes: [],
+                newQuote: '',
+                maxQuotes: 10,
+            },
+            computed: {
+                quotesNumber: function() {
+                    return this.quotes.length;
+                }
+            },
+            methods: {
+                addQuote: function() {
+                    this.quotes.push(this.newQuote);
+                    this.newQuote = '';
+                },
+                deleteQuote: function(index) {
+                    this.quotes.splice(index, 1);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
