@@ -6,7 +6,7 @@
     background: rgba(0, 0, 0, 0.5);
     margin: 0 auto;
     width: 500px;
-    max-width: 100%;
+    max-width: 50%;
     border: 1px solid black;
 }
 
@@ -53,9 +53,20 @@ input:focus {
     box-shadow: 0 5px 12px -2px rgba(0, 0, 0, 0.3);
 }
 
+.btn-success:disabled {
+    color: #61efa7;
+    background: rgba(0, 10, 25, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    cursor: default;
+}
+
 .btn:hover {
     background-color: rgba(255, 255, 255, 0.1);
     color: white;
+}
+
+.btn:hover:not(disabled) {
+    color: #61efa7;
 }
 
 .list-container {
@@ -86,7 +97,6 @@ input:focus {
     padding: 15px;
     border: none;
     margin-bottom: 1rem;
-    border: 1px solid black;
     -webkit-transition: all .2s ease;
     transition: all .2s ease;
     cursor: pointer;
